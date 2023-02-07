@@ -32,7 +32,7 @@ void setup() {
   for (int p = 0; p < pixelCount; p++) {
     // generate a random initial value for each pixel's
     // hue, saturation and intensity:
-    hue[p] = random(2000, 5000);      // red-orange to mid-orange
+    hue[p] = random(5000, 8000);      // red-orange to mid-orange (2000,5000)
     sat[p] = random(192, 255);        // high end of saturation
     intensity[p] = random(127, 192);  // mid-high range of intensity
   }
@@ -53,7 +53,6 @@ void loop() {
   if (IMU.gyroscopeAvailable()) {
     IMU.readGyroscope(gx, gy, gz);
   }
-
   float absGx = abs(gx);
   float absGy = abs(gy);
   float absGz = abs(gz);
@@ -62,9 +61,7 @@ void loop() {
   if (absGx + absGy + absGz > 10){
     moving = true;
   }
-
-
-
+  
   // loop over the pixels:
   for (int p = 0; p < pixelCount; p++) {
     // change hue -1 to 2 points:
@@ -85,7 +82,7 @@ void loop() {
 
     if(moving){
       intensityChange = random(-18,19);
-    } else if(millis()%random(300)<random(10)){
+    } else if(random(300) < 10){
       intensityChange = random(-10,11);
     } else{
       intensityChange = random(-2,3);
